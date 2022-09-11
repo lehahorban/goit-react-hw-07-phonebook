@@ -1,54 +1,26 @@
-import contactActions from './contacts-actions';
 import * as api from 'services/services';
-export const fetchContacts = () => {
-  const func = async dispatch => {
-    try {
-      console.log(dispatch);
-      dispatch(contactActions.fetchContactsLoading());
-      const data = await api.getContacts();
-      dispatch(contactActions.fetchContactsSuccess(data));
-    } catch (error) {
-      dispatch(contactActions.fetchContactsError(error.message));
-    }
-  };
-  return func;
-};
+import { createAsyncThunk } from '@reduxjs/toolkit';
 
-export const addContacts = data => {
-  const func = async dispatch => {
-    try {
-      dispatch(contactActions.addContactsLoading());
-      const result = await api.addContacts(data);
-      dispatch(contactActions.addContactsSuccess(result));
-      console.log(dispatch);
-    } catch (error) {
-      dispatch(contactActions.addContactsError(error.message));
-    }
-  };
-  return func;
-};
+export const fetchContacts = createAsyncThunk(
+  'contacts/fetchContacts',
+  async () => {
+    const contacts = await api.getContacts();
+    return contacts;
+  }
+);
 
-export const removeContacts = id => {
-  const func = async dispatch => {
-    try {
-      dispatch(contactActions.removeContactsLoading());
-      await api.removeContacts(id);
-      dispatch(contactActions.removeContactsSuccess(id));
-    } catch (error) {
-      dispatch(contactActions.removeContactsError(error.message));
-    }
-  };
-  return func;
-};
+export const addContacts = createAsyncThunk(
+  'contacts/addContacts',
+  async data => {
+    const result = await api.addContacts(data);
+    return result;
+  }
+);
 
-// export const fetchContacts = () => async dispatch => {
-//   dispatch(contactActions.fetchContactsLoading());
-//   try {
-//     console.log(dispatch);
-//     const contacts = await fetchApiContacts();
-//     console.log(contacts);
-//     dispatch(contactActions.fetchContactsSuccess(contacts));
-//   } catch (error) {
-//     dispatch(contactActions.fetchContactsError(error.message));
-//   }
-// };
+export const removeContacts = createAsyncThunk(
+  'contacts/removeContacts',
+  async id => {
+    await api.removeContacts(id);
+    return id;
+  }
+);
