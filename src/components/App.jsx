@@ -5,13 +5,9 @@ import { useEffect } from 'react';
 import * as contactsOperations from '../redux/contacts/contactsOperetions';
 import style from '../components/Style.module.css';
 import { useSelector, useDispatch } from 'react-redux';
-import {
-  addContacts,
-  removeContacts,
-} from '../redux/contacts/contacts-actions';
 import { filterContacts } from '../redux/filter/filter-actions';
 import { getFilter, getFilterContacts } from '../redux/filter/filter-selectors';
-import { fetchApiContacts } from 'services/services';
+import { getContacts } from 'services/services';
 
 function App() {
   const contacts = useSelector(getFilterContacts);
@@ -24,7 +20,7 @@ function App() {
   }, [dispatch]);
 
   const onAddContact = payload => {
-    const actions = addContacts(payload);
+    const actions = contactsOperations.addContacts(payload);
     const { name } = payload;
     const contact = contacts.find(
       contact => contact.name.toLowerCase() === name.toLowerCase()
@@ -38,14 +34,14 @@ function App() {
   };
 
   const onRemoveContact = payload => {
-    dispatch(removeContacts(payload));
+    dispatch(contactsOperations.removeContacts(payload));
   };
 
   const onFilterContact = event => {
     dispatch(filterContacts(event.target.value));
   };
 
-  fetchApiContacts();
+  getContacts();
 
   return (
     <div className={style.app}>
