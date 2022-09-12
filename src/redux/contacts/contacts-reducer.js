@@ -32,6 +32,7 @@ export const contactsReducer = createReducer(initialStore, {
   [addContacts.fulfilled]: (store, { payload }) => {
     store.loading = false;
     store.items.push(payload);
+    // store.items = [...store.items, payload];
   },
   [addContacts.rejected]: (store, { payload }) => {
     store.loading = false;
