@@ -9,7 +9,7 @@ function ContactList({ contacts, deleteUser }) {
   return (
     <ul className={style.list}>
       <p>Contact</p>
-      {isLoading && <p>Loading...</p>}
+      {isLoading && <p className={style.loading}>Loading...</p>}
       {contacts.map(({ id, name, phone }) => (
         <li key={shortid.generate()}>
           {name}: {phone}

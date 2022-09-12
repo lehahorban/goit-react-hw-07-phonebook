@@ -1,9 +1,44 @@
+body {
+  background: linear-gradient(90deg, #cfecd0, #a0cea7, #9ec0db);
+}
+
 .app {
-  margin-left: 50px;
+  width: 330px;
+  margin: auto;
+  margin-top: 50px;
   padding: 10px;
+  border: 1px solid #070f4b;
+  background-color: aliceblue;
+  -webkit-box-shadow: 5px 5px 15px 5px #000000;
+  box-shadow: 5px 5px 15px 5px #000000;
 }
 
 p {
   font-size: 20px;
   font-weight: 700;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+ul {
+  margin: 0;
+  padding: 0;
+}
+button {
+  cursor: pointer;
+}
+
+li {
+  list-style: none;
+}
+
+input {
+  outline: none;
 }
