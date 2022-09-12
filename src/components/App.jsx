@@ -7,7 +7,6 @@ import style from '../components/Style.module.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { filterContacts } from '../redux/filter/filter-actions';
 import { getFilter, getFilterContacts } from '../redux/filter/filter-selectors';
-import { getContacts } from 'services/services';
 
 function App() {
   const contacts = useSelector(getFilterContacts);
@@ -40,8 +39,6 @@ function App() {
   const onFilterContact = event => {
     dispatch(filterContacts(event.target.value));
   };
-
-  getContacts();
 
   return (
     <div className={style.app}>

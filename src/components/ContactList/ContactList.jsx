@@ -10,9 +10,9 @@ function ContactList({ contacts, deleteUser }) {
     <ul className={style.list}>
       <p>Contact</p>
       {isLoading && <p className={style.loading}>Loading...</p>}
-      {contacts.map(({ id, name, phone }) => (
+      {contacts.map(({ id, name, phone, number }) => (
         <li key={shortid.generate()}>
-          {name}: {phone}
+          {name}: {number || phone}
           <button onClick={() => deleteUser(id)}>Delete</button>
         </li>
       ))}
